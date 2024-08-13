@@ -10,7 +10,8 @@ const {setUserInfo} = useContext(UserContext);
 
   async function login(ev){
     ev.preventDefault();
-   const response = await fetch('http://localhost:4000/login',{
+ try{
+     const response = await fetch('http://localhost:4000/login',{
       method:'POST',
      body:JSON.stringify({username,password}) ,
      headers:{'Content-Type':'application/json'} ,
@@ -26,10 +27,15 @@ const {setUserInfo} = useContext(UserContext);
       alert('wrong credentials');
     }
   }
-  
+    
+ }catch(error){
+    console.log("An error occured:" error)
+ }
   if (redirect){
     return <Navigate to={'/'} />
   }
+
+  
   return(
     <form className="login" onSubmit={login}>
       <h1>Login</h1>
